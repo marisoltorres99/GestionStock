@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from models.Producto import Producto
 from models.Producto import db
 
@@ -20,6 +20,30 @@ def home():
 def listar():
     productos = Producto.query.all()
     return render_template("productos/index.html", productos=productos)
+
+@app.route("/productos/crear", methods=["GET", "POST"])
+def crear_producto():
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        
+        try:
+            precio = float(request.form["precio"])
+            stock = int(request.form["stock"])
+        except ValueError:
+            return "Precio y stock deben ser números válidos"
+
+        nuevo = Producto(
+            nombre=nombre,
+            precio=precio,
+            stock=stock
+        )
+
+        db.session.add(nuevo)
+        db.session.commit()
+
+        return redirect(url_for("listar"))
+
+    return render_template("productos/crear.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
