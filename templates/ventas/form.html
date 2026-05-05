@@ -1,0 +1,45 @@
+<h1>Crear Venta</h1>
+
+<form method="POST">
+    <label>Cliente:</label>
+    <select name="cliente_id">
+        <option value="">-- Venta sin cliente --</option>
+        {% for c in clientes %}
+            <option value="{{ c.id }}">{{ c.nombre }}</option>
+        {% endfor %}
+    </select>
+    <h3>Productos</h3>
+
+    <table border="1">
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Cantidad</th>
+        </tr>
+
+        {% for p in productos %}
+        <tr>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.precio }}</td>
+            <td>{{ p.stock }}</td>
+
+            <td>
+                {% if p.stock > 0 %}
+                    <input type="number"
+                        name="cantidad"
+                        min="0"
+                        max="{{ p.stock }}"
+                        value="0">
+                    <input type="hidden" name="producto_id" value="{{ p.id }}">
+                {% else %}
+                    <span>Sin stock</span>
+                    <input type="hidden" name="cantidad" value="0">
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Guardar venta</button>
+
+</form>
