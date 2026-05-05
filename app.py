@@ -43,7 +43,29 @@ def crear_producto():
 
         return redirect(url_for("listar"))
 
-    return render_template("productos/crear.html")
+    return render_template("productos/form.html")
+
+@app.route("/productos/editar/<int:id>", methods=["GET", "POST"])
+def editar_producto(id):
+    producto = db.session.get(Producto, id)
+
+    if not producto:
+        return "Producto no encontrado"
+
+    if request.method == "POST":
+        producto.nombre = request.form["nombre"]
+
+        try:
+            producto.precio = float(request.form["precio"])
+            producto.stock = int(request.form["stock"])
+        except ValueError:
+            return "Precio y stock deben ser números válidos"
+
+        db.session.commit()
+
+        return redirect(url_for("listar"))
+
+    return render_template("productos/form.html", producto=producto)
 
 if __name__ == "__main__":
     app.run(debug=True)
