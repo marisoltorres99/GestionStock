@@ -67,5 +67,17 @@ def editar_producto(id):
 
     return render_template("productos/form.html", producto=producto)
 
+@app.route("/productos/eliminar/<int:id>", methods=["POST"])
+def eliminar(id):
+    producto = db.session.get(Producto, id)
+
+    if not producto:
+        return "Producto no encontrado"
+
+    db.session.delete(producto)
+    db.session.commit()
+
+    return redirect(url_for("listar"))
+
 if __name__ == "__main__":
     app.run(debug=True)
