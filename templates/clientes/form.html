@@ -1,0 +1,29 @@
+<h1>
+    {% if cliente %}
+        Editar cliente
+    {% else %}
+        Crear cliente
+    {% endif %}
+</h1>
+
+<form method="POST">
+
+    <input type="text" name="nombre"
+           placeholder="Nombre"
+           value="{{ cliente.nombre if cliente else '' }}" required>
+
+    <input type="text" name="telefono"
+           placeholder="Teléfono"
+           value="{{ cliente.telefono if cliente else '' }}">
+
+    <button type="submit">
+        {% if cliente %}
+            Actualizar
+        {% else %}
+            Guardar
+        {% endif %}
+    </button>
+
+</form>
+
+<a href="/clientes">Volver</a>
