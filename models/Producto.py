@@ -5,3 +5,5 @@ class Producto(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, nullable=False)
+
+    detalles = db.relationship("DetalleVenta", backref="producto", lazy=True)
