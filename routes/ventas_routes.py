@@ -13,6 +13,17 @@ def listar():
     ventas = Venta.query.order_by(Venta.fecha.desc()).all()
     return render_template("ventas/index.html", ventas=ventas)
 
+@venta_bp.route("/ventas/<int:id>")
+def detalle(id):
+    venta = db.session.get(Venta, id)
+
+    if not venta:
+        return "Venta no encontrada"
+
+    detalles = venta.detalles
+
+    return render_template("ventas/detalle.html", venta=venta, detalles=detalles)
+
 @venta_bp.route("/ventas/crear", methods=["GET", "POST"])
 def crear():
 

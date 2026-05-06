@@ -1,0 +1,39 @@
+<h1>Detalle de Venta</h1>
+
+<p><strong>ID:</strong> {{ venta.id }}</p>
+<p><strong>Fecha:</strong> {{ venta.fecha }}</p>
+
+<p>
+<strong>Cliente:</strong>
+{% if venta.cliente %}
+    {{ venta.cliente.nombre }}
+{% else %}
+    Venta ocasional
+{% endif %}
+</p>
+
+<p><strong>Tipo de pago:</strong> {{ venta.tipo_pago }}</p>
+
+<h3>Productos</h3>
+
+<table border="1">
+    <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio unitario</th>
+        <th>Subtotal</th>
+    </tr>
+
+    {% for d in detalles %}
+    <tr>
+        <td>{{ d.producto.nombre }}</td>
+        <td>{{ d.cantidad }}</td>
+        <td>{{ d.precio_unitario }}</td>
+        <td>{{ d.cantidad * d.precio_unitario }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total: {{ venta.total }}</h3>
+
+<a href="/ventas">Volver</a>
