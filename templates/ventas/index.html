@@ -1,0 +1,34 @@
+<h1>Ventas</h1>
+
+<a href="/ventas/crear">Nueva venta</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Total</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for v in ventas %}
+    <tr>
+        <td>{{ v.id }}</td>
+        <td>{{ v.fecha }}</td>
+
+        <td>
+            {% if v.cliente %}
+                {{ v.cliente.nombre }}
+            {% else %}
+                Venta ocasional
+            {% endif %}
+        </td>
+
+        <td>{{ v.total }}</td>
+
+        <td>
+            <a href="/ventas/{{ v.id }}">Ver detalle</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

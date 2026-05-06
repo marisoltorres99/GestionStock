@@ -8,6 +8,11 @@ from datetime import datetime
 
 venta_bp = Blueprint("venta", __name__)
 
+@venta_bp.route("/ventas")
+def listar():
+    ventas = Venta.query.order_by(Venta.fecha.desc()).all()
+    return render_template("ventas/index.html", ventas=ventas)
+
 @venta_bp.route("/ventas/crear", methods=["GET", "POST"])
 def crear():
 
@@ -57,7 +62,7 @@ def crear():
         venta.total = total
         db.session.commit()
 
-        return redirect(url_for("cliente.listar"))
+        return redirect(url_for("venta.listar"))
 
     # GET
     clientes = Cliente.query.all()
