@@ -21,8 +21,12 @@ def crear():
         cliente_id = request.form.get("cliente_id") or None
         productos_ids = request.form.getlist("producto_id")
         cantidades = request.form.getlist("cantidad")
+        tipo_pago = request.form["tipo_pago"]
 
-        venta = Venta(cliente_id=cliente_id, total=0)
+        if tipo_pago == "fiado" and not cliente_id:
+            return "Las ventas fiadas requieren un cliente"
+
+        venta = Venta(cliente_id=cliente_id, tipo_pago=tipo_pago, total=0)
         db.session.add(venta)
         db.session.flush()
 

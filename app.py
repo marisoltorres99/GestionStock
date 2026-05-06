@@ -3,6 +3,7 @@ from models.db import db
 from routes.productos_routes import producto_bp
 from routes.clientes_routes import cliente_bp
 from routes.ventas_routes import venta_bp
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 
@@ -10,6 +11,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tienda.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
+
+#flask migrate
+migrate = Migrate(app, db)
 
 # registrar blueprint
 app.register_blueprint(producto_bp)

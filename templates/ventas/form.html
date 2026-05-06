@@ -31,6 +31,11 @@
                         min="0"
                         max="{{ p.stock }}"
                         value="0">
+                        <label>Tipo de pago:</label>
+                    <select name="tipo_pago" required>
+                        <option value="efectivo">Efectivo</option>
+                        <option value="fiado">Fiado</option>
+                    </select>
                     <input type="hidden" name="producto_id" value="{{ p.id }}">
                 {% else %}
                     <span>Sin stock</span>
