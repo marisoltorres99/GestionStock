@@ -3,6 +3,7 @@ from models.db import db
 from routes.productos_routes import producto_bp
 from routes.clientes_routes import cliente_bp
 from routes.ventas_routes import venta_bp
+from routes.pago_routes import pago_bp
 from flask_migrate import Migrate
 
 app = Flask(__name__)
@@ -19,6 +20,7 @@ migrate = Migrate(app, db)
 app.register_blueprint(producto_bp)
 app.register_blueprint(cliente_bp)
 app.register_blueprint(venta_bp)
+app.register_blueprint(pago_bp)
 
 with app.app_context():
     db.create_all()

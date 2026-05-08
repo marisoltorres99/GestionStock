@@ -1,0 +1,21 @@
+<h1>Pagos</h1>
+
+<a href="/pagos/crear">Registrar pago</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Monto</th>
+        <th>Fecha</th>
+    </tr>
+
+    {% for p in pagos %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.cliente.nombre }}</td>
+        <td>{{ p.monto }}</td>
+        <td>{{ p.fecha }}</td>
+    </tr>
+    {% endfor %}
+</table>
