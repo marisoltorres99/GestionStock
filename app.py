@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from models.db import db
 from routes.productos_routes import producto_bp
 from routes.clientes_routes import cliente_bp
@@ -24,7 +24,7 @@ app.register_blueprint(pago_bp)
 
 @app.route("/")
 def home():
-    return "Proyecto Flask funcionando 🚀"
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
