@@ -22,9 +22,6 @@ app.register_blueprint(cliente_bp)
 app.register_blueprint(venta_bp)
 app.register_blueprint(pago_bp)
 
-with app.app_context():
-    db.create_all()
-
 @app.route("/")
 def home():
     return "Proyecto Flask funcionando 🚀"
