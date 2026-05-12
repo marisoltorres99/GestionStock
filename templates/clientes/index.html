@@ -21,6 +21,10 @@
             <form action="/clientes/eliminar/{{ c.id }}" method="POST" style="display:inline;">
                 <button type="submit">Eliminar</button>
             </form>
+
+            <a href="/clientes/{{ c.id }}">
+                Ver detalle
+            </a>
         </td>
     </tr>
     {% endfor %}

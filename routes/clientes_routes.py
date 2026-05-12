@@ -1,5 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for
+from sqlalchemy import func
 from models.cliente import Cliente
+from models.venta import Venta
+from models.pago import Pago
 from models.db import db
 
 cliente_bp = Blueprint("cliente", __name__)
@@ -53,3 +56,30 @@ def eliminar(id):
         db.session.commit()
 
     return redirect(url_for("cliente.listar"))
+
+@cliente_bp.route("/clientes/<int:id>", methods=["GET"])
+def calcularDeuda(id):
+    
+    cliente = db.session.get(Cliente, id)
+    
+    monto_ventas_fiadas = (
+        db.session.query(func.sum(Venta.total))
+        .filter(
+            Venta.cliente_id == id, 
+            Venta.tipo_pago == "fiado"
+            )
+        .scalar() or 0
+    )
+
+    monto_pagos = (db.session.query(func.sum(Pago.monto))
+                   .filter(
+                       Pago.cliente_id == id
+                   )
+                   .scalar() or 0
+    )
+
+    deuda = monto_ventas_fiadas - monto_pagos
+
+    return render_template("clientes/detalle.html", cliente=cliente, deuda=deuda, 
+                           monto_pagos=monto_pagos, monto_ventas_fiadas=monto_ventas_fiadas)
+

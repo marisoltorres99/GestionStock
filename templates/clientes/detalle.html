@@ -1,0 +1,50 @@
+<h1>Detalle Cliente</h1>
+
+<hr>
+
+<h2>{{ cliente.nombre }}</h2>
+
+<p>
+    <strong>Teléfono:</strong>
+    {{ cliente.telefono }}
+</p>
+
+<hr>
+
+<h3>Estado de Cuenta</h3>
+
+<p>
+    <strong>Total ventas fiadas:</strong>
+    $ {{ monto_ventas_fiadas }}
+</p>
+
+<p>
+    <strong>Total pagos realizados:</strong>
+    $ {{ monto_pagos }}
+</p>
+
+<p>
+    <strong>Deuda actual:</strong>
+
+    {% if deuda > 0 %}
+        <span style="color:red;">
+            $ {{ deuda }}
+        </span>
+    {% else %}
+        <span style="color:green;">
+            Sin deuda
+        </span>
+    {% endif %}
+</p>
+
+<hr>
+
+<a href="/pagos/crear">
+    Registrar pago
+</a>
+
+<br><br>
+
+<a href="/clientes">
+    Volver
+</a>
