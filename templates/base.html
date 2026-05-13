@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestion de Stock</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Gestion de Stock</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('cliente.listar') }}">Clientes</a></li>
+            <li><a href="{{ url_for('producto.listar') }}">Productos</a></li>
+            <li><a href="{{ url_for('venta.listar') }}">Ventas</a></li>
+            <li><a href="{{ url_for('pago.listar') }}">Pagos</a></li>
+            <li><a href="{{ url_for('informe.listar') }}">Informes</a></li>
+        </ul>
+    </nav>
+
+    {% block contenido %}
+    {% endblock %}
+
+</body>
+</html>
