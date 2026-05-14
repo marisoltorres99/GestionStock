@@ -6,8 +6,8 @@
 
 <form method="POST">
 
-    <label>Cliente:</label>
-    <select name="cliente_id" required>
+    <label class="form-label">Cliente:</label>
+    <select class="form-select" name="cliente_id" required>
         <option value="">Seleccionar cliente</option>
 
         {% for c in clientes %}
@@ -17,18 +17,19 @@
         {% endfor %}
     </select>
 
-    <br><br>
+<br>
 
-    <label>Monto:</label>
+    <label class="form-label">Monto:</label>
     <input type="number"
            name="monto"
+           class="form-control"
            step="0.01"
            min="0"
            required>
 
-    <br><br>
+    <br>
 
-    <button type="submit">
+    <button class="btn btn-primary" type="submit">
         Guardar Pago
     </button>
 
@@ -36,6 +37,6 @@
 
 <br>
 
-<a href="/pagos">Ver pagos</a>
+<a class="btn btn-primary" href="/pagos">Ver pagos</a>
 
 {% endblock %}
