@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
 <h1>
     {% if producto %}
         Editar producto
@@ -31,3 +35,5 @@
 </form>
 
 <a href="/productos">Volver</a>
+
+{% endblock %}
