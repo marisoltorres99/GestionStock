@@ -12,19 +12,25 @@
 
 <form method="POST">
 
-    <input type="text" name="nombre"
+    <input type="text" name="nombre" class="form-control"
            placeholder="Nombre"
            value="{{ producto.nombre if producto else '' }}" required>
+    
+    <br>
 
-    <input type="number" step="0.01" name="precio"
+    <input type="number" step="0.01" name="precio" class="form-control"
            placeholder="Precio"
            value="{{ producto.precio if producto else '' }}" required>
+    
+    <br>
 
-    <input type="number" name="stock"
+    <input type="number" name="stock" class="form-control"
            placeholder="Stock"
            value="{{ producto.stock if producto else '' }}" required>
+    
+    <br>
 
-    <button type="submit">
+    <button class="btn btn-primary" type="submit">
         {% if producto %}
             Actualizar
         {% else %}
@@ -34,6 +40,8 @@
 
 </form>
 
-<a href="/productos">Volver</a>
+<br>
+
+<a class="btn btn-secondary" href="/productos">Volver</a>
 
 {% endblock %}
