@@ -4,9 +4,11 @@
 
 <h1>Ventas</h1>
 
-<a href="/ventas/crear">Nueva venta</a>
+<a class="btn btn-primary" href="/ventas/crear">Nueva venta</a>
 
-<table border="1">
+<hr>
+
+<table class="table table-striped table-hover">
     <tr>
         <th>ID</th>
         <th>Fecha</th>
@@ -33,10 +35,12 @@
         <td>{{ v.total }}</td>
 
         <td>
-            <a href="/ventas/{{ v.id }}">Ver detalle</a>
+            <a class="btn btn-primary" href="/ventas/{{ v.id }}">Ver detalle</a>
         </td>
     </tr>
     {% endfor %}
 </table>
+
+<a class="btn btn-secondary" href="/">Volver</a>
 
 {% endblock %}

@@ -6,7 +6,7 @@
 
 <form method="POST">
     <label>Cliente:</label>
-    <select name="cliente_id">
+    <select class="form-select" name="cliente_id">
         <option value="">-- Venta sin cliente --</option>
         {% for c in clientes %}
             <option value="{{ c.id }}">{{ c.nombre }}</option>
@@ -14,7 +14,7 @@
     </select>
     <h3>Productos</h3>
 
-    <table border="1">
+    <table class="table table-striped table-hover">
         <tr>
             <th>Producto</th>
             <th>Precio</th>
@@ -30,13 +30,13 @@
 
             <td>
                 {% if p.stock > 0 %}
-                    <input type="number"
+                    <input class="form-control" type="number"
                         name="cantidad"
                         min="0"
                         max="{{ p.stock }}"
                         value="0">
-                        <label>Tipo de pago:</label>
-                    <select name="tipo_pago" required>
+                        <label class="form-label">Tipo de pago:</label>
+                    <select class="form-select" name="tipo_pago" required>
                         <option value="efectivo">Efectivo</option>
                         <option value="fiado">Fiado</option>
                     </select>
@@ -49,7 +49,7 @@
         </tr>
         {% endfor %}
     </table>
-    <button type="submit">Guardar venta</button>
+    <button class="btn btn-primary" type="submit">Guardar venta</button>
 
 </form>
 
