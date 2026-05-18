@@ -35,11 +35,6 @@
                         min="0"
                         max="{{ p.stock }}"
                         value="0">
-                        <label class="form-label">Tipo de pago:</label>
-                    <select class="form-select" name="tipo_pago" required>
-                        <option value="efectivo">Efectivo</option>
-                        <option value="fiado">Fiado</option>
-                    </select>
                     <input type="hidden" name="producto_id" value="{{ p.id }}">
                 {% else %}
                     <span>Sin stock</span>
@@ -49,6 +44,12 @@
         </tr>
         {% endfor %}
     </table>
+    <label class="form-label">Tipo de pago:</label>
+    <select class="form-select" name="tipo_pago" required>
+        <option value="efectivo">Efectivo</option>
+        <option value="fiado">Fiado</option>
+    </select>
+    <br>
     <button class="btn btn-primary" type="submit">Guardar venta</button>
 
 </form>
