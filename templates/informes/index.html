@@ -4,9 +4,9 @@
 
 <h2>Emitir informe de: </h2>
 <hr>
-<a class="btn btn-primary" href="/clientes">Ventas diarias</a>
-<a class="btn btn-primary" href="/productos">Recaudacion mensual</a>
-<a class="btn btn-primary" href="/ventas">Productos mas vendidos</a>
-<a class="btn btn-primary" href="/pagos">Clientes con deudas</a>
+<a class="btn btn-primary" href="{{ url_for('informe.ventasDelDia') }}">Ventas diarias</a>
+<a class="btn btn-primary" href="#">Recaudacion mensual</a>
+<a class="btn btn-primary" href="#">Productos mas vendidos</a>
+<a class="btn btn-primary" href="#">Clientes con deudas</a>
 
 {% endblock %}
