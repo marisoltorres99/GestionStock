@@ -2,9 +2,11 @@ from flask import Blueprint, render_template
 from models.venta import Venta
 from models.detalle_venta import DetalleVenta
 from models.producto import Producto
+from models.cliente import Cliente
 from datetime import datetime, timedelta
 from sqlalchemy import func, select
 from models.db import db
+from services.deuda_service import calcular_deuda_cliente
 
 informe_bp = Blueprint("informe", __name__)
 
@@ -50,3 +52,27 @@ def productosMasVendidos():
     detallesVentas = db.session.execute(stmt).all()
 
     return render_template("informes/productosMasVendidos.html", detallesVentas=detallesVentas)
+
+@informe_bp.route("/informes/clientesConDeudas")
+def clientesConDeudas():
+    
+    clientes = db.session.query(Cliente).all()
+
+    clientes_con_deudas = []
+
+    for cliente in clientes:
+        monto_ventas_fiadas, monto_pagos, deuda = calcular_deuda_cliente(cliente.id)
+        if deuda > 0:
+            clientes_con_deudas.append({
+                "cliente": cliente,
+                "deuda": deuda,
+                "pagos": monto_pagos,
+                "ventas": monto_ventas_fiadas
+            })
+    
+    clientes_con_deudas.sort(
+        key=lambda x: x["deuda"],
+        reverse=True
+    )
+
+    return render_template("informes/clientesConDeudas.html", clientes_con_deudas=clientes_con_deudas)
