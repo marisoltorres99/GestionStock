@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h1>Reporte Productos Mas Vendidos</h1>
+
+<hr>
+
+<table class="table table-striped table-hover">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Producto</th>
+            <th>Cantidad Vendida</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for detalle in detallesVentas %}
+
+        <tr>
+
+            <td>{{ loop.index }}</td>
+
+            <td>{{ detalle.nombre }}</td>
+
+            <td>{{ detalle.cantidadProductoVendido }} unidades</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<a href="{{ url_for('informe.listar') }}" class="btn btn-secondary">Volver</a>
+
+{% endblock %}
