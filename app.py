@@ -6,10 +6,17 @@ from routes.ventas_routes import venta_bp
 from routes.pago_routes import pago_bp
 from routes.informes_routes import informe_bp
 from flask_migrate import Migrate
+import os
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tienda.db"
+database_url = os.getenv("DATABASE_URL")
+
+if database_url:
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tienda.db"
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
