@@ -4,7 +4,7 @@
 
 <h1>Ventas</h1>
 
-<a class="btn btn-primary" href="/ventas/crear">Nueva venta</a>
+<a class="btn btn-primary btn-responsive" href="/ventas/crear">Nueva venta</a>
 
 <hr>
 
@@ -36,13 +36,13 @@
             <td>{{ v.total }}</td>
 
             <td>
-                <a class="btn btn-primary" href="/ventas/{{ v.id }}">Ver detalle</a>
+                <a class="btn btn-primary btn-responsive" href="/ventas/{{ v.id }}">Ver detalle</a>
             </td>
         </tr>
         {% endfor %}
     </table>
 </div>
 
-<a class="btn btn-secondary" href="/">Volver</a>
+<a class="btn btn-secondary btn-responsive" href="/">Volver</a>
 
 {% endblock %}
