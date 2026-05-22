@@ -8,22 +8,24 @@
 
 <hr>
 
-<table class="table table-striped table-hover">
-    <tr>
-        <th>ID</th>
-        <th>Cliente</th>
-        <th>Monto</th>
-        <th>Fecha</th>
-    </tr>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+        </tr>
 
-    {% for p in pagos %}
-    <tr>
-        <td>{{ p.id }}</td>
-        <td>{{ p.cliente.nombre }}</td>
-        <td>{{ p.monto }}</td>
-        <td>{{ p.fecha }}</td>
-    </tr>
-    {% endfor %}
+        {% for p in pagos %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.cliente.nombre }}</td>
+            <td>{{ p.monto }}</td>
+            <td>{{ p.fecha }}</td>
+        </tr>
+        {% endfor %}
 </table>
+</div>
 
 {% endblock %}

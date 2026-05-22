@@ -20,23 +20,25 @@
 
 <h3>Productos</h3>
 
-<table class="table table-striped table-hover">
-    <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Precio unitario</th>
-        <th>Subtotal</th>
-    </tr>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>Subtotal</th>
+        </tr>
 
-    {% for d in detalles %}
-    <tr>
-        <td>{{ d.producto.nombre }}</td>
-        <td>{{ d.cantidad }}</td>
-        <td>{{ d.precio_unitario }}</td>
-        <td>{{ d.cantidad * d.precio_unitario }}</td>
-    </tr>
-    {% endfor %}
-</table>
+        {% for d in detalles %}
+        <tr>
+            <td>{{ d.producto.nombre }}</td>
+            <td>{{ d.cantidad }}</td>
+            <td>{{ d.precio_unitario }}</td>
+            <td>{{ d.cantidad * d.precio_unitario }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
 <h3>Total: {{ venta.total }}</h3>
 

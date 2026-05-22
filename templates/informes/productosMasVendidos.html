@@ -6,35 +6,37 @@
 
 <hr>
 
-<table class="table table-striped table-hover">
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
 
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Producto</th>
-            <th>Cantidad Vendida</th>
-        </tr>
-    </thead>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Producto</th>
+                <th>Cantidad Vendida</th>
+            </tr>
+        </thead>
 
-    <tbody>
+        <tbody>
 
-        {% for detalle in detallesVentas %}
+            {% for detalle in detallesVentas %}
 
-        <tr>
+            <tr>
 
-            <td>{{ loop.index }}</td>
+                <td>{{ loop.index }}</td>
 
-            <td>{{ detalle.nombre }}</td>
+                <td>{{ detalle.nombre }}</td>
 
-            <td>{{ detalle.cantidadProductoVendido }} unidades</td>
+                <td>{{ detalle.cantidadProductoVendido }} unidades</td>
 
-        </tr>
+            </tr>
 
-        {% endfor %}
+            {% endfor %}
 
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
+</div>
 
 <a href="{{ url_for('informe.listar') }}" class="btn btn-secondary">Volver</a>
 

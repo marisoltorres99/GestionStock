@@ -4,6 +4,7 @@
     <title>Gestion de Stock</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
@@ -12,48 +13,67 @@
         <div class="container-fluid">
 
             <a class="navbar-brand" href="/">
-                Gestion De Stock
+                Gestión de Stock
             </a>
 
-            <ul class="navbar-nav d-flex flex-row gap-3">
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('cliente.listar') }}">
-                        Clientes
-                    </a>
-                </li>
+                <span class="navbar-toggler-icon"></span>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('producto.listar') }}">
-                        Productos
-                    </a>
-                </li>
+            </button>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('venta.listar') }}">
-                        Ventas
-                    </a>
-                </li>
+            <div class="collapse navbar-collapse"
+                id="navbarNav">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('pago.listar') }}">
-                        Pagos
-                    </a>
-                </li>
+                <ul class="navbar-nav ms-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('informe.listar') }}">
-                        Informes
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{{ url_for('cliente.listar') }}">
+                            Clientes
+                        </a>
+                    </li>
 
-            </ul>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{{ url_for('producto.listar') }}">
+                            Productos
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{{ url_for('venta.listar') }}">
+                            Ventas
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{{ url_for('pago.listar') }}">
+                            Pagos
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{{ url_for('informe.listar') }}">
+                            Informes
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
 
         </div>
 
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mt-4 contenido-principal">
         {% block contenido %}
         {% endblock %}
     </div>

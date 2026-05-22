@@ -8,33 +8,35 @@
 
 <hr>
 
-<table class="table table-striped table-hover">
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Teléfono</th>
-        <th>Acciones</th>
-    </tr>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
 
-    {% for c in clientes %}
-    <tr>
-        <td>{{ c.id }}</td>
-        <td>{{ c.nombre }}</td>
-        <td>{{ c.telefono }}</td>
-        <td>
-            <a href="/clientes/editar/{{ c.id }}" class="btn btn-warning">Editar</a>
+        {% for c in clientes %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.nombre }}</td>
+            <td>{{ c.telefono }}</td>
+            <td>
+                <a href="/clientes/editar/{{ c.id }}" class="btn btn-warning">Editar</a>
 
-            <form action="/clientes/eliminar/{{ c.id }}" method="POST" style="display:inline;">
-                <button type="submit" class="btn btn-danger">Eliminar</button>
-            </form>
+                <form action="/clientes/eliminar/{{ c.id }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
 
-            <a href="/clientes/{{ c.id }}" class="btn btn-primary">
-                Ver detalle
-            </a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+                <a href="/clientes/{{ c.id }}" class="btn btn-primary">
+                    Ver detalle
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
 <a class="btn btn-secondary" href="/">Volver</a>
 
