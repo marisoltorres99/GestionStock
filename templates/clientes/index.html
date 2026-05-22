@@ -23,15 +23,17 @@
             <td>{{ c.nombre }}</td>
             <td>{{ c.telefono }}</td>
             <td>
-                <a href="/clientes/editar/{{ c.id }}" class="btn btn-warning btn-responsive">Editar</a>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="/clientes/editar/{{ c.id }}" class="btn btn-warning btn-responsive">Editar</a>
 
-                <form action="/clientes/eliminar/{{ c.id }}" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-danger btn-responsive">Eliminar</button>
-                </form>
+                    <form action="/clientes/eliminar/{{ c.id }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-responsive">Eliminar</button>
+                    </form>
 
-                <a href="/clientes/{{ c.id }}" class="btn btn-primary btn-responsive">
-                    Ver detalle
-                </a>
+                    <a href="/clientes/{{ c.id }}" class="btn btn-primary btn-responsive">
+                        Ver detalle
+                    </a>
+                </div>
             </td>
         </tr>
         {% endfor %}
