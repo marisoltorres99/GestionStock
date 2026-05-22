@@ -48,3 +48,15 @@ body {
     }
 
 }
+
+.btn-responsive {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+
+    .btn-responsive {
+        width: auto;
+    }
+
+}
