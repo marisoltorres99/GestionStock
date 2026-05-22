@@ -4,7 +4,7 @@
 
 <h1>Clientes</h1>
 
-<a href="{{ url_for('cliente.crear') }}" class="btn btn-primary">Nuevo cliente</a>
+<a href="{{ url_for('cliente.crear') }}" class="btn btn-primary w-100">Nuevo cliente</a>
 
 <hr>
 
@@ -23,13 +23,13 @@
             <td>{{ c.nombre }}</td>
             <td>{{ c.telefono }}</td>
             <td>
-                <a href="/clientes/editar/{{ c.id }}" class="btn btn-warning">Editar</a>
+                <a href="/clientes/editar/{{ c.id }}" class="btn btn-warning w-100">Editar</a>
 
                 <form action="/clientes/eliminar/{{ c.id }}" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="submit" class="btn btn-danger w-100">Eliminar</button>
                 </form>
 
-                <a href="/clientes/{{ c.id }}" class="btn btn-primary">
+                <a href="/clientes/{{ c.id }}" class="btn btn-primary w-100">
                     Ver detalle
                 </a>
             </td>
@@ -38,6 +38,6 @@
     </table>
 </div>
 
-<a class="btn btn-secondary" href="/">Volver</a>
+<a class="btn btn-secondary w-100" href="/">Volver</a>
 
 {% endblock %}
