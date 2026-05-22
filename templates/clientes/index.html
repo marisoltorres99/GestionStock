@@ -24,13 +24,13 @@
             <td>{{ c.telefono }}</td>
             <td>
                 <div class="d-flex gap-2 flex-wrap">
-                    <a href="/clientes/editar/{{ c.id }}" class="btn btn-warning btn-responsive">Editar</a>
+                    <a href="/clientes/editar/{{ c.id }}" class="btn btn-warning btn-responsive btn-acciones">Editar</a>
 
                     <form action="/clientes/eliminar/{{ c.id }}" method="POST" class="d-inline">
-                        <button type="submit" class="btn btn-danger btn-responsive">Eliminar</button>
+                        <button type="submit" class="btn btn-danger btn-responsive btn-acciones">Eliminar</button>
                     </form>
 
-                    <a href="/clientes/{{ c.id }}" class="btn btn-primary btn-responsive">
+                    <a href="/clientes/{{ c.id }}" class="btn btn-primary btn-responsive btn-acciones">
                         Ver detalle
                     </a>
                 </div>

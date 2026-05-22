@@ -55,6 +55,10 @@ body {
     width: 100%;
 }
 
+.btn-acciones {
+    min-width: 110px;
+}
+
 @media (min-width: 768px) {
 
     .btn-responsive {
