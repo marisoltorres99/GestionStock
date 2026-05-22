@@ -21,6 +21,8 @@ body {
     animation: aparecer 0.8s ease;
 
     max-width: 1200px;
+
+    width: 100%;
 }
 
 @keyframes aparecer {
