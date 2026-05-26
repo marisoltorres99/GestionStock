@@ -22,7 +22,7 @@
             <td>{{ p.id }}</td>
             <td>{{ p.cliente.nombre }}</td>
             <td>{{ p.monto }}</td>
-            <td>{{ p.fecha }}</td>
+            <td>{{ p.fecha.strftime('%d/%m/%Y %H:%M') }}</td>
         </tr>
         {% endfor %}
 </table>

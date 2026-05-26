@@ -64,7 +64,7 @@
 
             <tr>
 
-                <td>{{ venta.fecha }}</td>
+                <td>{{ venta.fecha.strftime('%d/%m/%Y %H:%M') }}</td>
 
                 <td>{{ venta.tipo_pago }}</td>
 
@@ -99,7 +99,7 @@
 
             <tr>
 
-                <td>{{ pago.fecha }}</td>
+                <td> {{ pago.fecha.strftime('%d/%m/%Y %H:%M') }} </td>
 
                 <td>$ {{ pago.monto }}</td>
 

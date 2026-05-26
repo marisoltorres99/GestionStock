@@ -22,7 +22,7 @@
         {% for v in ventas %}
         <tr>
             <td>{{ v.id }}</td>
-            <td>{{ v.fecha }}</td>
+            <td>{{ v.fecha.strftime('%d/%m/%Y %H:%M') }}</td>
             <td>{{ v.tipo_pago }}</td>
 
             <td>
