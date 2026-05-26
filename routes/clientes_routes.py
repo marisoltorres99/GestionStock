@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from sqlalchemy import func
 from models.cliente import Cliente
 from models.venta import Venta
@@ -51,9 +51,19 @@ def editar(id):
 def eliminar(id):
     cliente = db.session.get(Cliente, id)
 
+    if cliente.ventas or cliente.pagos:
+        flash(
+            "No se puede eliminar un cliente con ventas o pagos registrados",
+            "danger"
+        )
+
+        return redirect(url_for("cliente.listar"))
+
     if cliente:
         db.session.delete(cliente)
         db.session.commit()
+    
+    flash("Cliente eliminado correctamente", "success")
 
     return redirect(url_for("cliente.listar"))
 

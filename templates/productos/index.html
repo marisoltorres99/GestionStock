@@ -30,7 +30,8 @@
                     <div class="d-flex gap-2 flex-wrap">
                         <a class="btn btn-warning btn-responsive" href="/productos/editar/{{ p.id }}">Editar</a>
                         <form action="/productos/eliminar/{{ p.id }}" method="POST" style="display:inline;">
-                            <button class="btn btn-danger btn-responsive" type="submit">Eliminar</button>
+                            <button class="btn btn-danger btn-responsive" 
+                            type="submit" onclick="return confirm('¿Eliminar cliente?')">Eliminar</button>
                         </form>
                     </div>
                 </td>
