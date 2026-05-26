@@ -34,6 +34,9 @@ app.register_blueprint(venta_bp)
 app.register_blueprint(pago_bp)
 app.register_blueprint(informe_bp)
 
+#flash
+app.secret_key = "clave_secreta"
+
 @app.route("/")
 def home():
     return render_template("index.html")

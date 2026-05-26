@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models.venta import Venta
 from models.cliente import Cliente
 from models.producto import Producto
 from models.detalle_venta import DetalleVenta
 from models.db import db
-from datetime import datetime
 
 venta_bp = Blueprint("venta", __name__)
 
@@ -56,7 +55,8 @@ def crear():
 
             if producto.stock < cantidad:
                 db.session.rollback()
-                return "Stock insuficiente"
+                flash("Stock insuficiente", "danger")
+                return redirect(url_for("venta.crear"))
             
             subtotal = producto.precio * cantidad
 
