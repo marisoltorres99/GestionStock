@@ -80,6 +80,9 @@ def calcularDeuda(id):
 
     deuda = monto_ventas_fiadas - monto_pagos
 
+    ventas = cliente.ventas
+    pagos = cliente.pagos
+
     return render_template("clientes/detalle.html", cliente=cliente, deuda=deuda, 
-                           monto_pagos=monto_pagos, monto_ventas_fiadas=monto_ventas_fiadas)
+                           monto_pagos=monto_pagos, monto_ventas_fiadas=monto_ventas_fiadas, ventas=ventas, pagos=pagos)
 

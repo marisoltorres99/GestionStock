@@ -9,3 +9,5 @@ class Pago(db.Model):
     cliente_id = db.Column(db.Integer, db.ForeignKey("cliente.id"), nullable=False)
 
     cliente = db.relationship("Cliente")
+
+    cliente = db.relationship("Cliente", back_populates="pagos")

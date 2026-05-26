@@ -10,3 +10,5 @@ class Venta(db.Model):
     cliente_id = db.Column(db.Integer, db.ForeignKey("cliente.id"), nullable=True)
 
     detalles = db.relationship("DetalleVenta", backref="venta", lazy=True)
+
+    cliente = db.relationship("Cliente", back_populates="ventas")

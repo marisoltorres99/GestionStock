@@ -34,12 +34,84 @@
         <span style="color:red;">
             $ {{ deuda }}
         </span>
+    {% elif deuda < 0 %}
+        <p>Saldo a favor: </p>
+        <span style="color: blue;">$ {{ deuda | abs }}</span>
     {% else %}
         <span style="color:green;">
             Sin deuda
         </span>
     {% endif %}
 </p>
+
+<h3>Ventas realizadas</h3>
+
+<div class="table-responsive">
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Tipo Pago</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for venta in ventas %}
+
+            <tr>
+
+                <td>{{ venta.fecha }}</td>
+
+                <td>{{ venta.tipo_pago }}</td>
+
+                <td>$ {{ venta.total }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<h3 class="mt-4">Pagos realizados</h3>
+
+<div class="table-responsive">
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Monto</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for pago in pagos %}
+
+            <tr>
+
+                <td>{{ pago.fecha }}</td>
+
+                <td>$ {{ pago.monto }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
 
 <hr>
 

@@ -5,4 +5,6 @@ class Cliente(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     telefono = db.Column(db.String(50), nullable=True)
 
-    ventas = db.relationship("Venta", backref="cliente", lazy=True)
+    ventas = db.relationship("Venta", back_populates="cliente")
+
+    pagos = db.relationship("Pago", back_populates="cliente")
