@@ -6,6 +6,11 @@ from routes.ventas_routes import venta_bp
 from routes.pago_routes import pago_bp
 from routes.informes_routes import informe_bp
 from flask_migrate import Migrate
+from models.cliente import Cliente
+from models.producto import Producto
+from models.venta import Venta
+from sqlalchemy import func
+from datetime import datetime, timedelta
 import os
 
 app = Flask(__name__)
@@ -39,7 +44,51 @@ app.secret_key = "clave_secreta"
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+
+    total_clientes = Cliente.query.count()
+
+    total_productos = Producto.query.count()
+
+    total_ventas = Venta.query.count()
+
+    inicio_hoy = datetime.today().replace(
+        hour=0,
+        minute=0,
+        second=0,
+        microsecond=0
+    )
+
+    inicio_manana = inicio_hoy + timedelta(days=1)
+
+    ventas_hoy = (
+        Venta.query.filter(
+            Venta.fecha >= inicio_hoy,
+            Venta.fecha < inicio_manana
+        ).count()
+    )
+
+    inicio_mes = datetime.today().replace(
+        day=1,
+        hour=0,
+        minute=0,
+        second=0,
+        microsecond=0
+    )
+
+    recaudacion_mes = (
+        db.session.query(func.sum(Venta.total))
+        .filter(Venta.fecha >= inicio_mes)
+        .scalar() or 0
+    )
+
+    return render_template(
+        "index.html",
+        total_clientes=total_clientes,
+        total_productos=total_productos,
+        total_ventas=total_ventas,
+        ventas_hoy=ventas_hoy,
+        recaudacion_mes=recaudacion_mes
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)

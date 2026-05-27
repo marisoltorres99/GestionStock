@@ -1,1 +1,113 @@
 {% extends "base.html" %}
+
+{% block contenido %}
+
+<h1 class="mb-4">
+    Dashboard
+</h1>
+
+<div class="row g-4">
+
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Clientes
+                </h5>
+
+                <h2>
+                    {{ total_clientes }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Productos
+                </h5>
+
+                <h2>
+                    {{ total_productos }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Ventas
+                </h5>
+
+                <h2>
+                    {{ total_ventas }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Ventas Hoy
+                </h5>
+
+                <h2>
+                    {{ ventas_hoy }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-12">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Recaudación del Mes
+                </h5>
+
+                <h2>
+                    $ {{ recaudacion_mes }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
