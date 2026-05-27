@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models.producto import Producto
 from models.db import db
 
@@ -55,8 +55,15 @@ def editar(id):
 def eliminar(id):
     producto = db.session.get(Producto, id)
 
+    if producto.detalles:
+        flash("No se puede eliminar un producto con ventas registradas", "danger")
+
+        return redirect(url_for("producto.listar"))
+
     if producto:
         db.session.delete(producto)
         db.session.commit()
+    
+    flash("Producto eliminado correctamente", "success")
 
     return redirect(url_for("producto.listar"))
