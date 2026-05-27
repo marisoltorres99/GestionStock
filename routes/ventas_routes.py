@@ -77,6 +77,8 @@ def crear():
         venta.total = total
         db.session.commit()
 
+        flash("Venta registrada correctamente", "success")
+
         return redirect(url_for("venta.listar"))
 
     # GET

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models.pago import Pago
 from models.cliente import Cliente
 from models.db import db
@@ -20,6 +20,8 @@ def crear():
 
         db.session.add(pago)
         db.session.commit()
+
+        flash("Pago registrado correctamente", "success")
 
         return redirect(url_for("pago.listar"))
     else:

@@ -25,6 +25,8 @@ def crear():
         db.session.add(nuevo)
         db.session.commit()
 
+        flash("Producto registrado correctamente", "success")
+
         return redirect(url_for("producto.listar"))
 
     return render_template("productos/form.html")
@@ -46,6 +48,8 @@ def editar(id):
             return "Datos inválidos"
 
         db.session.commit()
+
+        flash("Producto modificado correctamente", "success")
 
         return redirect(url_for("producto.listar"))
 

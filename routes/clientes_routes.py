@@ -24,6 +24,8 @@ def crear():
         db.session.add(nuevo)
         db.session.commit()
 
+        flash("Cliente registrado correctamente", "success")
+
         return redirect(url_for("cliente.listar"))
 
     return render_template("clientes/form.html")
@@ -41,6 +43,8 @@ def editar(id):
         cliente.telefono = request.form["telefono"]
 
         db.session.commit()
+
+        flash("Cliente modificado correctamente", "success")
 
         return redirect(url_for("cliente.listar"))
 
