@@ -8,6 +8,22 @@ from sqlalchemy import func, select
 from models.db import db
 from services.deuda_service import calcular_deuda_cliente
 
+from openpyxl import Workbook
+from flask import send_file
+from io import BytesIO
+
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Table,
+    TableStyle,
+    Paragraph,
+    Spacer
+)
+
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.pagesizes import letter
+
 informe_bp = Blueprint("informe", __name__)
 
 @informe_bp.route("/informes")
@@ -76,3 +92,147 @@ def clientesConDeudas():
     )
 
     return render_template("informes/clientesConDeudas.html", clientes_con_deudas=clientes_con_deudas)
+
+@informe_bp.route("/informes/ventasDelDia/excel")
+def exportarVentasExcel():
+
+    inicio_hoy = datetime.today().replace(
+        hour=0,
+        minute=0,
+        second=0,
+        microsecond=0
+    )
+
+    inicio_manana = inicio_hoy + timedelta(days=1)
+
+    ventas = Venta.query.filter(
+        Venta.fecha >= inicio_hoy,
+        Venta.fecha < inicio_manana
+    ).all()
+
+    wb = Workbook()
+
+    ws = wb.active
+
+    ws.title = "Ventas del Día"
+
+    ws.append([
+        "ID",
+        "Fecha",
+        "Cliente",
+        "Tipo Pago",
+        "Total"
+    ])
+
+    for venta in ventas:
+
+        cliente = (
+            venta.cliente.nombre
+            if venta.cliente
+            else "Consumidor Final"
+        )
+
+        ws.append([
+            venta.id,
+            venta.fecha.strftime('%d/%m/%Y %H:%M'),
+            cliente,
+            venta.tipo_pago,
+            venta.total
+        ])
+
+    archivo = BytesIO()
+
+    wb.save(archivo)
+
+    archivo.seek(0)
+
+    return send_file(
+        archivo,
+        as_attachment=True,
+        download_name="ventas_del_dia.xlsx",
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
+@informe_bp.route("/informes/ventasDelDia/pdf")
+def exportarVentasPDF():
+
+    inicio_hoy = datetime.today().replace(
+        hour=0,
+        minute=0,
+        second=0,
+        microsecond=0
+    )
+
+    inicio_manana = inicio_hoy + timedelta(days=1)
+
+    ventas = Venta.query.filter(
+        Venta.fecha >= inicio_hoy,
+        Venta.fecha < inicio_manana
+    ).all()
+
+    buffer = BytesIO()
+
+    doc = SimpleDocTemplate(
+        buffer,
+        pagesize=letter
+    )
+
+    elementos = []
+
+    estilos = getSampleStyleSheet()
+
+    titulo = Paragraph(
+        "Reporte Ventas del Día",
+        estilos['Title']
+    )
+
+    elementos.append(titulo)
+
+    elementos.append(Spacer(1, 20))
+
+    datos = [[
+        "ID",
+        "Fecha",
+        "Cliente",
+        "Tipo Pago",
+        "Total"
+    ]]
+
+    for venta in ventas:
+
+        cliente = (
+            venta.cliente.nombre
+            if venta.cliente
+            else "Consumidor Final"
+        )
+
+        datos.append([
+            venta.id,
+            venta.fecha.strftime('%d/%m/%Y %H:%M'),
+            cliente,
+            venta.tipo_pago,
+            f"$ {venta.total}"
+        ])
+
+    tabla = Table(datos)
+
+    tabla.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), colors.grey),
+        ('TEXTCOLOR', (0,0), (-1,0), colors.whitesmoke),
+        ('GRID', (0,0), (-1,-1), 1, colors.black),
+        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0,0), (-1,0), 10),
+    ]))
+
+    elementos.append(tabla)
+
+    doc.build(elementos)
+
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name="ventas_del_dia.pdf",
+        mimetype="application/pdf"
+    )
