@@ -23,7 +23,21 @@
         <tr>
             <td>{{ v.id }}</td>
             <td>{{ v.fecha.strftime('%d/%m/%Y %H:%M') }}</td>
-            <td>{{ v.tipo_pago }}</td>
+            <td>
+                {% if v.tipo_pago == "efectivo" %}
+
+                <span class="badge bg-success">
+                    Efectivo
+                </span>
+
+                {% else %}
+
+                    <span class="badge bg-warning text-dark">
+                        Fiado
+                    </span>
+
+                {% endif %}
+            </td>
 
             <td>
                 {% if v.cliente %}

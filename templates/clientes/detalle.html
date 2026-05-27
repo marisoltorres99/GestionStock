@@ -31,14 +31,13 @@
     <strong>Deuda actual:</strong>
 
     {% if deuda > 0 %}
-        <span style="color:red;">
+        <span class="text-danger fw-bold">
             $ {{ deuda }}
         </span>
     {% elif deuda < 0 %}
-        <p>Saldo a favor: </p>
-        <span style="color: blue;">$ {{ deuda | abs }}</span>
+        <span class="text-primary fw-bold">Saldo a favor: $ {{ deuda | abs }}</span>
     {% else %}
-        <span style="color:green;">
+        <span class="text-success fw-bold">
             Sin deuda
         </span>
     {% endif %}
