@@ -1,31 +1,107 @@
-## TiendaArticulosLimpieza
+# Gestión de Stock
 
-## 🧱 Backend
+Sistema web de gestión de stock y ventas desarrollado con Python y Flask.
+Permite administrar productos, clientes, ventas, pagos y reportes comerciales mediante una interfaz responsive.
+
+---
+
+# 🚀 Funcionalidades
+
+## 📦 Gestión de Productos
+
+* CRUD de productos
+* Control de stock
+* Validación de stock insuficiente
+
+## 👥 Gestión de Clientes
+
+* CRUD de clientes
+* Historial de ventas
+* Historial de pagos
+* Cálculo automático de deuda
+
+## 🛒 Gestión de Ventas
+
+* Registro de ventas con múltiples productos
+* Ventas en efectivo o fiadas
+* Actualización automática de stock
+* Validaciones de negocio
+
+## 💳 Gestión de Pagos
+
+* Registro de pagos de clientes
+* Actualización automática de deuda
+
+## 📊 Reportes
+
+* Ventas del día
+* Productos más vendidos
+* Clientes con deuda
+* Exportación de reportes a Excel y PDF
+
+## 🎨 Interfaz
+
+* Diseño responsive
+* Navbar adaptable a dispositivos móviles
+* Dashboard principal
+* Alertas visuales y mensajes flash
+* Modales de confirmación
+
+---
+
+# 🧱 Backend
 
 * Python
 * Flask
-* Flask-SQLAlchemy (ORM)
-* Flask-Migrate (migraciones de base de datos)
+* Flask-SQLAlchemy
+* Flask-Migrate
+* SQLAlchemy ORM
 
-## 🗄️ Base de datos
+---
 
-* SQLite
+# 🗄️ Base de Datos
 
-## 🎨 Frontend
+* SQLite (desarrollo)
+* PostgreSQL (deploy)
+
+---
+
+# 🎨 Frontend
 
 * HTML
-* Jinja2 (motor de templates)
+* CSS
+* Bootstrap 5
+* Jinja2
 
-## 🔧 Herramientas
+---
+
+# 📄 Exportación de Reportes
+
+* OpenPyXL (Excel)
+* ReportLab (PDF)
+
+---
+
+# ☁️ Deploy
+
+* Render
+
+---
+
+# 🔧 Herramientas
 
 * Git & GitHub
-* Entorno virtual (venv)
 * Visual Studio Code
+* Entorno virtual (venv)
 
-## 🚀 Funcionalidades
+---
 
-* CRUD de productos
-* Gestión de clientes
-* Registro de ventas con múltiples productos
-* Actualización automática de stock
-* Migraciones de base de datos
+# 📱 Características
+
+* Responsive Design
+* Arquitectura modular con Blueprints
+* Templates reutilizables con base.html
+* Manejo de relaciones entre entidades
+* Validaciones backend/frontend
+
+---
