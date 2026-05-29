@@ -370,3 +370,135 @@ def exportarClientesDeudasPDF():
         download_name="clientes_con_deudas.pdf",
         mimetype="application/pdf"
     )
+
+@informe_bp.route("/informes/productosMasVendidos/excel")
+def exportarProductosMasVendidosExcel():
+
+    stmt = (
+        select(
+            Producto.nombre,
+            func.sum(DetalleVenta.cantidad).label("cantidadProductoVendido")
+        )
+        .join(
+            DetalleVenta,
+            Producto.id == DetalleVenta.producto_id
+        )
+        .group_by(
+            Producto.id,
+            Producto.nombre
+        )
+        .order_by(
+            func.sum(DetalleVenta.cantidad).desc()
+        )
+    )
+
+    detallesVentas = db.session.execute(stmt).all()
+
+    wb = Workbook()
+
+    ws = wb.active
+
+    ws.title = "Productos Más Vendidos"
+
+    ws.append([
+        "Producto",
+        "Cantidad Vendida"
+    ])
+
+    for detalle in detallesVentas:
+
+        ws.append([
+            detalle.nombre,
+            detalle.cantidadProductoVendido
+        ])
+
+    archivo = BytesIO()
+
+    wb.save(archivo)
+
+    archivo.seek(0)
+
+    return send_file(
+        archivo,
+        as_attachment=True,
+        download_name="productos_mas_vendidos.xlsx",
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
+@informe_bp.route("/informes/productosMasVendidos/pdf")
+def exportarProductosMasVendidosPDF():
+
+    stmt = (
+        select(
+            Producto.nombre,
+            func.sum(DetalleVenta.cantidad).label("cantidadProductoVendido")
+        )
+        .join(
+            DetalleVenta,
+            Producto.id == DetalleVenta.producto_id
+        )
+        .group_by(
+            Producto.id,
+            Producto.nombre
+        )
+        .order_by(
+            func.sum(DetalleVenta.cantidad).desc()
+        )
+    )
+
+    detallesVentas = db.session.execute(stmt).all()
+
+    buffer = BytesIO()
+
+    doc = SimpleDocTemplate(
+        buffer,
+        pagesize=letter
+    )
+
+    elementos = []
+
+    estilos = getSampleStyleSheet()
+
+    titulo = Paragraph(
+        "Reporte Productos Más Vendidos",
+        estilos['Title']
+    )
+
+    elementos.append(titulo)
+
+    elementos.append(Spacer(1, 20))
+
+    datos = [[
+        "Producto",
+        "Cantidad Vendida"
+    ]]
+
+    for detalle in detallesVentas:
+
+        datos.append([
+            detalle.nombre,
+            detalle.cantidadProductoVendido
+        ])
+
+    tabla = Table(datos)
+
+    tabla.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), colors.grey),
+        ('TEXTCOLOR', (0,0), (-1,0), colors.whitesmoke),
+        ('GRID', (0,0), (-1,-1), 1, colors.black),
+        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0,0), (-1,0), 10),
+    ]))
+
+    elementos.append(tabla)
+
+    doc.build(elementos)
+
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name="productos_mas_vendidos.pdf",
+        mimetype="application/pdf"
+    )

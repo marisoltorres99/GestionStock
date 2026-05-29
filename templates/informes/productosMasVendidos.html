@@ -38,6 +38,12 @@
     </table>
 </div>
 
-<a href="{{ url_for('informe.listar') }}" class="btn btn-secondary btn-responsive">Volver</a>
+<div class="d-flex gap-2 flex-wrap">
+    <a href="{{ url_for('informe.exportarProductosMasVendidosPDF') }}" class="btn btn-danger btn-responsive">Exportar PDF</a>
+
+    <a href="{{ url_for('informe.exportarProductosMasVendidosExcel') }}" class="btn btn-success btn-responsive">Exportar Excel</a>
+
+    <a href="{{ url_for('informe.listar') }}" class="btn btn-secondary btn-responsive">Volver</a>
+</div>
 
 {% endblock %}
