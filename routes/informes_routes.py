@@ -236,3 +236,137 @@ def exportarVentasPDF():
         download_name="ventas_del_dia.pdf",
         mimetype="application/pdf"
     )
+
+@informe_bp.route("/informes/clientesDeudas/excel")
+def exportarClientesDeudasExcel():
+
+    clientes = db.session.query(Cliente).all()
+
+    clientes_con_deudas = []
+
+    for cliente in clientes:
+
+        monto_ventas_fiadas, monto_pagos, deuda = calcular_deuda_cliente(cliente.id)
+
+        if deuda > 0:
+
+            clientes_con_deudas.append({
+                "cliente": cliente,
+                "deuda": deuda,
+                "pagos": monto_pagos,
+                "ventas": monto_ventas_fiadas
+            })
+
+    wb = Workbook()
+
+    ws = wb.active
+
+    ws.title = "Clientes con Deudas"
+
+    ws.append([
+        "Cliente",
+        "Ventas Fiadas",
+        "Pagos",
+        "Deuda"
+    ])
+
+    for item in clientes_con_deudas:
+
+        ws.append([
+            item["cliente"].nombre,
+            item["ventas"],
+            item["pagos"],
+            item["deuda"]
+        ])
+
+    archivo = BytesIO()
+
+    wb.save(archivo)
+
+    archivo.seek(0)
+
+    return send_file(
+        archivo,
+        as_attachment=True,
+        download_name="clientes_con_deudas.xlsx",
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
+@informe_bp.route("/informes/clientesDeudas/pdf")
+def exportarClientesDeudasPDF():
+
+    clientes = db.session.query(Cliente).all()
+
+    clientes_con_deudas = []
+
+    for cliente in clientes:
+
+        monto_ventas_fiadas, monto_pagos, deuda = calcular_deuda_cliente(cliente.id)
+
+        if deuda > 0:
+
+            clientes_con_deudas.append({
+                "cliente": cliente,
+                "deuda": deuda,
+                "pagos": monto_pagos,
+                "ventas": monto_ventas_fiadas
+            })
+
+    buffer = BytesIO()
+
+    doc = SimpleDocTemplate(
+        buffer,
+        pagesize=letter
+    )
+
+    elementos = []
+
+    estilos = getSampleStyleSheet()
+
+    titulo = Paragraph(
+        "Reporte Clientes con Deudas",
+        estilos['Title']
+    )
+
+    elementos.append(titulo)
+
+    elementos.append(Spacer(1, 20))
+
+    datos = [[
+        "Cliente",
+        "Ventas Fiadas",
+        "Pagos",
+        "Deudas"
+    ]]
+
+    for item in clientes_con_deudas:
+
+        datos.append([
+            item["cliente"].nombre,
+            f"$ {item['ventas']}",
+            f"$ {item['pagos']}",
+            f"$ {item['deuda']}"
+        ])
+
+    tabla = Table(datos)
+
+    tabla.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), colors.grey),
+        ('TEXTCOLOR', (0,0), (-1,0), colors.whitesmoke),
+        ('GRID', (0,0), (-1,-1), 1, colors.black),
+        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0,0), (-1,0), 10),
+    ]))
+
+    elementos.append(tabla)
+
+    doc.build(elementos)
+
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name="clientes_con_deudas.pdf",
+        mimetype="application/pdf"
+    )
